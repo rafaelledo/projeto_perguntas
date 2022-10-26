@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-
-import 'src/widgets/question.dart';
-import 'src/widgets/reponse.dart';
+import 'src/widgets/my_form.dart';
 import 'src/widgets/result.dart';
 
 void main(List<String> args) => runApp(const PerguntaApp());
 
 class PerguntaAppState extends State<PerguntaApp> {
-  var _perguntaSelecionada = 0;
+  var _selectedQuestion = 0;
 
-  final _perguntas = const [
+  final _questions = const [
     {
       'texto': 'Qual é a sua cor favorita?',
       'respostas': ['Preto', 'Vermelho', 'Verde', 'Branco'],
@@ -24,24 +22,20 @@ class PerguntaAppState extends State<PerguntaApp> {
     },
   ];
 
-  void _responder() {
-    if (temPerguntaSelecionada) {
+  bool get haveSelectedQuestion {
+    return _selectedQuestion < _questions.length;
+  }
+
+  void _respond() {
+    if (haveSelectedQuestion) {
       setState(() {
-        _perguntaSelecionada++;
+        _selectedQuestion++;
       });
     }
   }
 
-  bool get temPerguntaSelecionada {
-    return _perguntaSelecionada < _perguntas.length;
-  }
-
   @override
   Widget build(BuildContext context) {
-    List<String> respostas = temPerguntaSelecionada
-        ? _perguntas[_perguntaSelecionada].cast()['respostas']
-        : [];
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -53,13 +47,11 @@ class PerguntaAppState extends State<PerguntaApp> {
             ),
           ),
         ),
-        body: temPerguntaSelecionada
-            ? Column(
-                children: <Widget>[
-                  Question(
-                      _perguntas[_perguntaSelecionada]['texto'].toString()),
-                  ...respostas.map((t) => Response(t, _responder)).toList(),
-                ],
+        body: haveSelectedQuestion
+            ? My_Form(
+                questions: _questions,
+                selectedQuestion: _selectedQuestion,
+                respond: _respond,
               )
             : Result('Parabéns!'),
       ),
