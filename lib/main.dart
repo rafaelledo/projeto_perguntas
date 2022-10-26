@@ -1,5 +1,6 @@
-import './question.dart';
+import 'question.dart';
 import 'package:flutter/material.dart';
+import 'reponse.dart';
 
 void main(List<String> args) => runApp(PerguntaApp());
 
@@ -23,23 +24,20 @@ class _PerguntaAppState extends State<PerguntaApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Perguntas'),
+          title: Container(
+            width: double.infinity,
+            child: Text(
+              'Perguntas',
+              textAlign: TextAlign.center,
+            ),
+          ),
         ),
         body: Column(
           children: [
             Question(perguntas[_perguntaSelecionada]),
-            ElevatedButton(
-              child: Text('Resposta 1'),
-              onPressed: _responder,
-            ),
-            ElevatedButton(
-              child: Text('Resposta 2'),
-              onPressed: _responder,
-            ),
-            ElevatedButton(
-              child: Text('Resposta 3'),
-              onPressed: _responder,
-            ),
+            Response('Resposta 1', _responder),
+            Response('Resposta 2', _responder),
+            Response('Resposta 3', _responder),
           ],
         ),
       ),

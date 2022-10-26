@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 class Question extends StatelessWidget {
   final String text;
 
-  const Question(this.text);
+  const Question(this.text, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.all(20),
+      margin: const EdgeInsets.all(10),
       child: Text(
         text,
-        style: TextStyle(fontSize: 28),
+        style: TextStyle(fontSize: 25),
         textAlign: TextAlign.center,
       ),
     );
