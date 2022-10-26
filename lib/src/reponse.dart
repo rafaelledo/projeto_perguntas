@@ -9,7 +9,8 @@ class Response extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(5),
+      width: double.infinity,
       child: ElevatedButton(
         onPressed: quandoSelecionado,
         style: ElevatedButton.styleFrom(
