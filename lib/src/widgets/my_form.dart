@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 import 'question.dart';
-import 'reponse.dart';
+import 'response.dart';
 
-class My_Form extends StatelessWidget {
+class MyForm extends StatelessWidget {
   final List<Map<String, Object>> questions;
   final int selectedQuestion;
-  final void Function(int) respond;
+  final void Function(int) whenRespond;
 
-  const My_Form({
+  const MyForm({
     super.key,
     required this.questions,
     required this.selectedQuestion,
-    required this.respond,
+    required this.whenRespond,
   });
 
   bool get haveSelectedQuestion {
@@ -21,19 +21,20 @@ class My_Form extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, Object>> respostas = haveSelectedQuestion
+    List<Map<String, Object>> answers = haveSelectedQuestion
         ? questions[selectedQuestion].cast()['respostas']
         : [];
     return Column(
-      children: [
+      children: <Widget>[
         Question(questions[selectedQuestion]['texto'].toString()),
-        ...respostas.map((resp) {
-          return Response(
-              resp['texto'].toString(),
-              (() => whenRespond(
-                    resp['nota'],
-                  )));
-        }).toList(),
+        ...answers
+            .map((res) => Response(
+                  res['texto'].toString(),
+                  () => {
+                    whenRespond(int.parse(res['nota'].toString()))
+                  },
+                ))
+            .toList(),
       ],
     );
   }

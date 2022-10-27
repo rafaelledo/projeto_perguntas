@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class Response extends StatelessWidget {
   final String text;
-  final void Function() quandoSelecionado;
+  final void Function() whenSelected;
 
-  const Response(this.text, this.quandoSelecionado, {super.key});
+  const Response(this.text, this.whenSelected, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class Response extends StatelessWidget {
       margin: const EdgeInsets.all(5),
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: quandoSelecionado,
+        onPressed: whenSelected,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.black,
           foregroundColor: Colors.white,

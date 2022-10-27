@@ -64,12 +64,12 @@ class PerguntaAppState extends State<PerguntaApp> {
           ),
         ),
         body: haveSelectedQuestion
-            ? My_Form(
+            ? MyForm(
                 questions: _questions,
                 selectedQuestion: _selectedQuestion,
-                respond: _respond,
+                whenRespond: _respond,
               )
-            : Result('Parabéns!'),
+            : const Result('Parabéns!'),
       ),
     );
   }
