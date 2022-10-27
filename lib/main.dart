@@ -6,19 +6,34 @@ void main(List<String> args) => runApp(const PerguntaApp());
 
 class PerguntaAppState extends State<PerguntaApp> {
   var _selectedQuestion = 0;
-
+  var _totalScore = 0;
   final _questions = const [
     {
       'texto': 'Qual é a sua cor favorita?',
-      'respostas': ['Preto', 'Vermelho', 'Verde', 'Branco'],
+      'respostas': [
+        {'texto': 'Preto', 'nota': 10},
+        {'texto': 'Vermelho', 'nota': 5},
+        {'texto': 'Verde', 'nota': 3},
+        {'texto': 'Branco', 'nota': 1},
+      ],
     },
     {
       'texto': 'Qual é a seu animal favorito?',
-      'respostas': ['Coelho', 'Cobra', 'Elefante', 'Leão'],
+      'respostas': [
+        {'texto': 'Coelho', 'nota': 10},
+        {'texto': 'Cobra', 'nota': 3},
+        {'texto': 'Elefante', 'nota': 4},
+        {'texto': 'Leão', 'nota': 7},
+      ],
     },
     {
       'texto': 'Qual o seu instrutor favorito?',
-      'respostas': ['Maria', 'João', 'Leonardo', 'Pedro'],
+      'respostas': [
+        {'texto': 'Maria', 'nota': 6},
+        {'texto': 'João', 'nota': 5},
+        {'texto': 'Leonardo', 'nota': 9},
+        {'texto': 'Pedro', 'nota': 2},
+      ],
     },
   ];
 
@@ -26,10 +41,11 @@ class PerguntaAppState extends State<PerguntaApp> {
     return _selectedQuestion < _questions.length;
   }
 
-  void _respond() {
+  void _respond(int score) {
     if (haveSelectedQuestion) {
       setState(() {
         _selectedQuestion++;
+        _totalScore += score;
       });
     }
   }

@@ -6,7 +6,7 @@ import 'reponse.dart';
 class My_Form extends StatelessWidget {
   final List<Map<String, Object>> questions;
   final int selectedQuestion;
-  final void Function() respond;
+  final void Function(int) respond;
 
   const My_Form({
     super.key,
@@ -21,13 +21,19 @@ class My_Form extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> respostas = haveSelectedQuestion
+    List<Map<String, Object>> respostas = haveSelectedQuestion
         ? questions[selectedQuestion].cast()['respostas']
         : [];
     return Column(
       children: [
         Question(questions[selectedQuestion]['texto'].toString()),
-        ...respostas.map((t) => Response(t, respond)).toList(),
+        ...respostas.map((resp) {
+          return Response(
+              resp['texto'].toString(),
+              (() => whenRespond(
+                    resp['nota'],
+                  )));
+        }).toList(),
       ],
     );
   }
