@@ -30,9 +30,7 @@ class MyForm extends StatelessWidget {
         ...answers
             .map((res) => Response(
                   res['texto'].toString(),
-                  () => {
-                    whenRespond(int.parse(res['nota'].toString()))
-                  },
+                  () => {whenRespond(int.parse(res['nota'].toString()))},
                 ))
             .toList(),
       ],

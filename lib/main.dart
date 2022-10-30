@@ -49,6 +49,13 @@ class PerguntaAppState extends State<PerguntaApp> {
       });
     }
   }
+  
+  void _restartForm() {
+    setState(() {
+      _selectedQuestion = 0;
+      _totalScore = 0;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +77,7 @@ class PerguntaAppState extends State<PerguntaApp> {
                 selectedQuestion: _selectedQuestion,
                 whenRespond: _respond,
               )
-            : const Result('Parabéns!'),
+            : Result(_totalScore, _restartForm),
       ),
     );
   }
